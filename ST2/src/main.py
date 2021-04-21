@@ -1,4 +1,5 @@
 from scipy.io import wavfile as wv
+import os
 import numpy as np
 import math
 
@@ -8,8 +9,10 @@ def main():
     This is a backbone of the project. This Fuction runs all the others.
     """
     audio_a = generate_audio(2)
-    audio_b = generate_audio(4)
+    audio_b = generate_audio(time=4, frequence=400)
     audio_y1 = convolve_audio(audio_a, audio_b)
+    save_audio(audio_a, 'base_audio_1.wav', 'ST2/audios')
+    save_audio(audio_b, 'base_audio_2.wav', 'ST2/audios')
     save_audio(audio_y1, 'audio_1.wav', 'ST2/results')
 
     audio_y2 = convolve_audio(audio_y1, audio_y1)
@@ -54,7 +57,15 @@ def save_audio(file, name, path):
         name (string): file name.
         path (string): path to save the file.
     """
-    wv.write('{}/{}'.format(path, name), 44100, (file).astype(np.int16))
+    if file:
+        _path = os.path.abspath(path)
+        if os.path.isfile('{}/{}'.format(_path, name)):
+            os.remove('{}/{}'.format(_path, name))
+            wv.write('{}/{}'.format(_path, name),
+                     44100, (file).astype(np.int16))
+        else:
+            wv.write('{}/{}'.format(_path, name),
+                     44100, (file).astype(np.int16))
 
 
 if __name__ == '__main__':

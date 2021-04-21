@@ -15,6 +15,26 @@ def main():
     save_audio(audio_y2, 'audio_2', 'ST2/results')
 
 
+def generate_audio(time):
+    """ # Generate Audio
+    Function to generate audio based on time.
+    https://stackoverflow.com/a/33913403/10239129
+    Args:
+        time (int): time of audio (seconds)
+    """
+    ...
+
+
+def convolve_audio(*audios):
+    """# Convolve audio
+    Function that make a convolution with audios.
+
+    Args:
+        *audios (): audio lists.
+    """
+    ...
+
+
 def save_audio(file, name, path):
     """ ## Save Audio
 

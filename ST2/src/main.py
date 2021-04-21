@@ -1,5 +1,6 @@
 from scipy.io import wavfile as wv
 import numpy as np
+import math
 
 
 def main():
@@ -9,20 +10,30 @@ def main():
     audio_a = generate_audio(2)
     audio_b = generate_audio(4)
     audio_y1 = convolve_audio(audio_a, audio_b)
-    save_audio(audio_y1, 'audio_1', 'ST2/results')
+    save_audio(audio_y1, 'audio_1.wav', 'ST2/results')
 
     audio_y2 = convolve_audio(audio_y1, audio_y1)
-    save_audio(audio_y2, 'audio_2', 'ST2/results')
+    save_audio(audio_y2, 'audio_2.wav', 'ST2/results')
 
 
-def generate_audio(time, sample_rate=44100.0):
-    """ # Generate Audio
+def generate_audio(time, sample_rate=44100.0, frequence=100):
+    """# Generate Audio
     Function to generate audio based on time.
-    https://stackoverflow.com/a/33913403/10239129
+
     Args:
-        time (int): time of audio (seconds)
+        time (int): time of the audio.
+        sample_rate (float, optional): sample rate of the audio. Defaults to 44100.0.
+        frequence (int, optional): frequence of the audio. Defaults to 100.
+
+    Returns:
+        numpy.ndarray: audio with the samples.
     """
-    ...
+    audio = []
+    num_samples = (time * 1000) * (sample_rate / 1000.0)
+    for x in range(int(num_samples)):
+        audio.append(np.iinfo(np.int16).max *
+                     math.sin(2 * math.pi * frequence * (x / sample_rate)))
+    return np.array(audio)
 
 
 def convolve_audio(*audios):

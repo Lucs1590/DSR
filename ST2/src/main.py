@@ -15,7 +15,7 @@ def main():
     save_audio(audio_y2, 'audio_2', 'ST2/results')
 
 
-def generate_audio(time):
+def generate_audio(time, sample_rate=44100.0):
     """ # Generate Audio
     Function to generate audio based on time.
     https://stackoverflow.com/a/33913403/10239129

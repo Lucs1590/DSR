@@ -10,7 +10,7 @@ def main():
     """
     audio_a = generate_audio(2)
     audio_b = generate_audio(time=4, frequence=400)
-    audio_y1 = convolve_audio(audio_a, audio_b)
+    audio_y1 = convolve_audio(audio_b, audio_a)
     save_audio(audio_a, 'base_audio_1.wav', 'ST2/audios')
     save_audio(audio_b, 'base_audio_2.wav', 'ST2/audios')
     save_audio(audio_y1, 'audio_1.wav', 'ST2/results')
@@ -39,14 +39,18 @@ def generate_audio(time, sample_rate=44100.0, frequence=100):
     return np.array(audio)
 
 
-def convolve_audio(*audios):
+def convolve_audio(audio, kernel):
     """# Convolve audio
     Function that make a convolution with audios.
 
     Args:
-        *audios (): audio lists.
+        audio (numpy.ndarray): audio to convolve.
+        kernel (numpy.ndarray): kernel to convolve.
+
+    Returns:
+        numpy.ndarray: result of dot multiplication of audio and kernel
     """
-    ...
+    return np.convolve(audio, kernel)
 
 
 def save_audio(file, name, path):
@@ -57,7 +61,7 @@ def save_audio(file, name, path):
         name (string): file name.
         path (string): path to save the file.
     """
-    if file:
+    if len(file):
         _path = os.path.abspath(path)
         if os.path.isfile('{}/{}'.format(_path, name)):
             os.remove('{}/{}'.format(_path, name))

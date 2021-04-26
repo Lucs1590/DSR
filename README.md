@@ -3,5 +3,6 @@ Digital Speech Recognition subject, carried out at São Paulo State University (
 
 Here are the algorithms developed by me:
 - [Reverse audio file](https://github.com/Lucs1590/DSR/tree/main/ST1)
+- [Convolve audio](https://github.com/Lucs1590/DSR/tree/main/ST2)
 
 

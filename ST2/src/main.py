@@ -17,6 +17,15 @@ def main():
 
     audio_y2 = convolve_audio(audio_y1, audio_y1)
     save_audio(audio_y2, 'audio_2.wav', 'ST2/results')
+    print(
+        'The general formula to audios size is n = (n1 + n2)-1.\n \
+        For example, audio 1 has {0} samples and audio 2 has {1} samples.\n \
+        The convolution result has {3} samples.'.format(
+            len(audio_a),
+            len(audio_b),
+            (len(audio_a)+len(audio_b))-1
+        )
+    )
 
 
 def generate_audio(time, sample_rate=44100.0, frequence=100):

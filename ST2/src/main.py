@@ -20,7 +20,7 @@ def main():
     print(
         'The general formula to audios size is n = (n1 + n2)-1.\n \
         For example, audio 1 has {0} samples and audio 2 has {1} samples.\n \
-        The convolution result has {3} samples.'.format(
+        The convolution result has {2} samples.'.format(
             len(audio_a),
             len(audio_b),
             (len(audio_a)+len(audio_b))-1

@@ -11,7 +11,7 @@ pip install requirements.txt --user
 ```
 
 ## Running the project
-After install the prerequisites, run the following command at terminal on ST1 folder:
+After install the prerequisites, run the following command at terminal on ST2 folder:
 ```bash
 python src/main.py
 ```

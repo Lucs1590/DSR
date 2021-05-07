@@ -44,6 +44,18 @@ def create_low_pass_filter(size, passing_freq, samples_sec):
 
 
 def to_high_pass_filter(M, low_pass_filter: list):
+    """# To High Pass
+
+    Args:
+        M (int): the filter magnetude.
+        low_pass_filter (list): the filter.
+
+    Raises:
+        ValueError: Filter with odd magnetude.
+
+    Returns:
+        list: the high pass filter.
+    """
     if (M % 2) == 0:
         raise ValueError('''You can't use even magnetude.''')
     low_pass_filter = np.array(low_pass_filter)

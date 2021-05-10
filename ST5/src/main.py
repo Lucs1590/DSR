@@ -13,7 +13,10 @@ def main():
     low_pass_filter = create_filter(
         M, cutoff_frequencies[0], samples_p_second, False)
 
-    high_pass_filter = to_high_pass_filter(M, low_pass_filter)
+    high_pass_filter = create_filter(
+        M, cutoff_frequencies[1], samples_p_second, True)
+    high_pass_filter = to_high_pass_filter(M, high_pass_filter)
+
     print(
         'Low-pass filter: {0}\nHigh-pass filter: {1}'.format(
             low_pass_filter, high_pass_filter)

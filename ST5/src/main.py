@@ -50,6 +50,16 @@ def create_filter(size, passing_freq, samples_sec, high_pass):
 
 
 def define_cutoff(max_freq, passing_freq, high_pass):
+    """ # Define Cutoff Value
+
+    Args:
+        max_freq (int): the max frequency allowed
+        passing_freq (int): the cutoff value
+        high_pass (bool): if is a high pass filter
+
+    Returns:
+        float: the cutoff value to subtitute wc
+    """
     cut_value_divisor = (math.pi / (max_freq / passing_freq))
     if high_pass:
         cut_value_divisor = (math.pi / (max_freq / passing_freq)) \

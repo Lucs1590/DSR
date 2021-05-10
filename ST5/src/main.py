@@ -10,8 +10,9 @@ def main():
     cutoff_frequencies = [2_500, 3_500]
     samples_p_second = 10_000
 
-    low_pass_filter = create_low_pass_filter(
-        M, cutoff_frequencies, samples_p_second)
+    low_pass_filter = create_filter(
+        M, cutoff_frequencies[0], samples_p_second, False)
+
     high_pass_filter = to_high_pass_filter(M, low_pass_filter)
     print(
         'Low-pass filter: {0}\nHigh-pass filter: {1}'.format(
@@ -19,22 +20,22 @@ def main():
     )
 
 
-def create_low_pass_filter(size, passing_freq, samples_sec):
+def create_filter(size, passing_freq, samples_sec, high_pass):
     """ # Creating a Filter (FIR)
 
     Args:
         size (int): number of samples.
         passing_freq (int): cut out frequency value.
         samples_sec (int): sample rate.
+        high_pass (bool): is high pass filter?
 
     Returns:
         list: list with the filter values.
     """
     filter = []
     max_freq = samples_sec / 2
-    cut_value_divisor = (math.pi / (max_freq / passing_freq)) \
-        if passing_freq >= (max_freq*0.3) \
-        else (math.pi - (math.pi/(max_freq/passing_freq)))
+
+    cut_value_divisor = define_cutoff(max_freq, passing_freq, high_pass)
 
     for n in range(size+1):
         filter.append(
@@ -43,6 +44,15 @@ def create_low_pass_filter(size, passing_freq, samples_sec):
         )
 
     return filter
+
+
+def define_cutoff(max_freq, passing_freq, high_pass):
+    cut_value_divisor = (math.pi / (max_freq / passing_freq))
+    if high_pass:
+        cut_value_divisor = (math.pi / (max_freq / passing_freq)) \
+            if passing_freq >= (max_freq*0.3) \
+            else (math.pi - (math.pi/(max_freq/passing_freq)))
+    return cut_value_divisor
 
 
 def to_high_pass_filter(M, low_pass_filter: list):

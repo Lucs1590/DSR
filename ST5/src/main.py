@@ -9,6 +9,7 @@ def main():
     M = 5
     cutoff_frequencies = [2_500, 3_500]
     samples_p_second = 10_000
+    band_stop = True
 
     low_pass_filter = create_filter(
         M, cutoff_frequencies[0], samples_p_second, False)
@@ -17,9 +18,14 @@ def main():
         M, cutoff_frequencies[1], samples_p_second, True)
     high_pass_filter = to_high_pass_filter(M, high_pass_filter)
 
+    result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
     print(
-        'Low-pass filter: {0}\nHigh-pass filter: {1}'.format(
-            low_pass_filter, high_pass_filter)
+        'Low-pass filter: {0}\nHigh-pass filter: {1}\n {2} filter: {3}'.format(
+            low_pass_filter,
+            high_pass_filter,
+            'Band-stop'if band_stop else 'Band-pass',
+            result_filter
+        )
     )
 
 
@@ -89,6 +95,22 @@ def to_high_pass_filter(M, low_pass_filter: list):
     result[::2] = low_pass_filter[::2]
     result[1::2] = low_pass_filter[1::2] * -1
     return result
+
+
+def join_filters(filter_1, filter_2, band_stop):
+    """ # Join Filters
+
+    Args:
+        filter_1 (list): list with first filter
+        filter_2 (list): list with second filter
+        band_stop (bool): if the result is band-stop filter
+
+    Returns:
+        list: band-stop filter or band-pass filter
+    """
+    filter_1 = np.array(filter_1)
+    filter_2 = np.array(filter_2)
+    return (filter_1 + filter_2).tolist() if band_stop else (filter_1 - filter_2).tolist()
 
 
 if __name__ == '__main__':

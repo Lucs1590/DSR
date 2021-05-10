@@ -7,9 +7,11 @@ def main():
     This is a backbone of the project. This Fuction runs all the others.
     """
     M = 5
-    cutoff_freq = 1_500
-    samples_p_second = 24_000
-    low_pass_filter = create_low_pass_filter(M, cutoff_freq, samples_p_second)
+    cutoff_frequencies = [2_500, 3_500]
+    samples_p_second = 10_000
+
+    low_pass_filter = create_low_pass_filter(
+        M, cutoff_frequencies, samples_p_second)
     high_pass_filter = to_high_pass_filter(M, low_pass_filter)
     print(
         'Low-pass filter: {0}\nHigh-pass filter: {1}'.format(

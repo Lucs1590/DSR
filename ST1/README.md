@@ -10,7 +10,7 @@ The file is transformed into an array and then we apply a reverse function to th
 First you need to install the prerequisites and to do that, you need to have **Python3** or higher and **pip**.
 After having the two prerequisites mentioned, just run:
 ```bash
-pip install requirements.txt --user
+pip install -r  requirements.txt --user
 ```
 
 ## Running the project

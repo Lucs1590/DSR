@@ -9,7 +9,7 @@ We set an inverse fourier filter and make a convolution with a signal to have a 
 First you need to install the prerequisites and to do that, you need to have **Python3** or higher and **pip**.
 After having the two prerequisites mentioned, just run:
 ```bash
-pip install requirements.txt --user
+pip install -r  requirements.txt --user
 ```
 
 ## Running the project

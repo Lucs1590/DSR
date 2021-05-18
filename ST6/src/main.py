@@ -6,7 +6,7 @@ def main():
     """ # Main
     This is a backbone of the project. This Fuction runs all the others.
     """
-    M = 5
+    M = 4
     cutoff_frequencies = [2_500, 3_500]
     samples_p_second = 10_000
     band_stop = True

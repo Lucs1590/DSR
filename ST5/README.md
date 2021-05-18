@@ -1,7 +1,7 @@
-# Band Pass Filter
+# Band Pass and Band Stop Filter
 
 # How it works?
-
+In this exercise, a trick was performed, which by adding a low-pass filter to a high-pass filter generates a bass-stop filter. Like this, we have the case where it is possible to generate a band-pass filter by subtracting a lowpass filter with a second one.
 
 # How to run?
 
@@ -17,6 +17,3 @@ After install the prerequisites, run the following command at terminal on ST5 fo
 ```bash
 python src/main.py
 ```
-
-## Observation
-Probably you will not hear the audio in the results directory, even if a scale is performed, as the number of samples is small.

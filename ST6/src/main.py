@@ -39,10 +39,12 @@ def create_filter(size, passing_freq, samples_sec, high_pass):
     cut_value_divisor = define_cutoff(max_freq, passing_freq, high_pass)
 
     for n in range(size+1):
-        filter.append(
-            math.sin(cut_value_divisor * (n - (size/2))) /
-            (math.pi * (n - (size/2)))
-        )
+        try:
+            value = math.sin(cut_value_divisor * (n - (size/2))) / \
+                (math.pi * (n - (size/2)))
+            filter.append(value)
+        except:
+            filter.append(0)
 
     return filter
 
@@ -79,8 +81,6 @@ def to_high_pass_filter(M, low_pass_filter: list):
     Returns:
         list: the high pass filter.
     """
-    if (M % 2) == 0:
-        raise ValueError('''You can't use even magnetude.''')
     low_pass_filter = np.array(low_pass_filter)
     low_pass_filter = low_pass_filter[::-1]
     result = [None]*(len(low_pass_filter))

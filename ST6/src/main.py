@@ -1,4 +1,5 @@
 from scipy.io import wavfile as wv
+from functools import reduce
 import numpy as np
 import math
 
@@ -13,12 +14,12 @@ def main():
     band_stop = True
     raw_audio = audio_to_arr(read_audio("ST6/audios/soneto.wav"))
 
-    low_pass_filter = create_filter(
-        M, cutoff_frequencies[0], samples_p_second, False)
+    low_pass_filter = normalize(create_filter(
+        M, cutoff_frequencies[0], samples_p_second, False))
 
     high_pass_filter = create_filter(
         M, cutoff_frequencies[1], samples_p_second, True)
-    high_pass_filter = to_high_pass_filter(M, high_pass_filter)
+    high_pass_filter = normalize(to_high_pass_filter(M, high_pass_filter))
 
     result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
 
@@ -45,6 +46,20 @@ def audio_to_arr(audio):
         numpy.ndarray: array of audio data.
     """
     return np.array(audio[1], dtype=float)
+
+
+def normalize(_list):
+    """ # Normalize list
+
+    Args:
+        signal (list): list of audio or filter.
+
+    Returns:
+        list: list of normalized value
+    """
+    list_sum = reduce((lambda x, y: x + y), _list)
+    normalized_signal = list(map(lambda hi: hi/list_sum, _list))
+    return normalized_signal
 
 
 def create_filter(size, passing_freq, samples_sec, high_pass):

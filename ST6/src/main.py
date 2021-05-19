@@ -1,3 +1,4 @@
+from scipy.io import wavfile as wv
 import numpy as np
 import math
 
@@ -10,6 +11,7 @@ def main():
     cutoff_frequencies = [2_500, 3_500]
     samples_p_second = 10_000
     band_stop = True
+    raw_audio = audio_to_arr(read_audio("ST6/audios/soneto.wav"))
 
     low_pass_filter = create_filter(
         M, cutoff_frequencies[0], samples_p_second, False)
@@ -19,6 +21,30 @@ def main():
     high_pass_filter = to_high_pass_filter(M, high_pass_filter)
 
     result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
+
+
+def read_audio(path):
+    """## Read Audio
+
+    Args:
+        path (string): audio file path.
+
+    Returns:
+        tuple: the read file.
+    """
+    return wv.read(path)
+
+
+def audio_to_arr(audio):
+    """ ## Audio to Array
+
+    Args:
+        audio (tuple): original read audio file.
+
+    Returns:
+        numpy.ndarray: array of audio data.
+    """
+    return np.array(audio[1], dtype=float)
 
 
 def create_filter(size, passing_freq, samples_sec, high_pass):

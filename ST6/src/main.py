@@ -85,7 +85,7 @@ def create_filter(size, passing_freq, samples_sec, high_pass):
                 (math.pi * (n - (size/2)))
             filter.append(value)
         except:
-            filter.append(0)
+            filter.append(passing_freq/max_freq)
 
     return filter
 

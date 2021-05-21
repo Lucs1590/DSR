@@ -17,11 +17,12 @@ def main():
     low_pass_filter = normalize(create_filter(
         M, cutoff_frequencies[0], samples_p_second, False))
 
-    high_pass_filter = create_filter(
-        M, cutoff_frequencies[1], samples_p_second, True)
-    high_pass_filter = normalize(to_high_pass_filter(M, high_pass_filter))
+    high_pass_filter = normalize(create_filter(
+        M, cutoff_frequencies[1], samples_p_second, True))
+    high_pass_filter = to_high_pass_filter(M, high_pass_filter)
 
-    result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
+    result_filter = normalize(join_filters(low_pass_filter, high_pass_filter, band_stop))
+    print(result_filter)
 
 
 def read_audio(path):

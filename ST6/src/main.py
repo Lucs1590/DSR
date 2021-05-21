@@ -21,8 +21,9 @@ def main():
         M, cutoff_frequencies[1], samples_p_second, True))
     high_pass_filter = to_high_pass_filter(M, high_pass_filter)
 
-    result_filter = normalize(join_filters(low_pass_filter, high_pass_filter, band_stop))
-    print(result_filter)
+    result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
+    print('Resulted Filter: {0}\n Normalized Filter (0dB): {1}\n Sum of normalized coef.: {2}'.format(
+        result_filter, normalize(result_filter), sum(normalize(result_filter))))
 
 
 def read_audio(path):

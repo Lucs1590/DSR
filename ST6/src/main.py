@@ -22,7 +22,7 @@ def main():
     high_pass_filter = to_high_pass_filter(M, high_pass_filter)
 
     result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
-    print('Resulted Filter: {0}\n Normalized Filter (0dB): {1}\n Sum of normalized coef.: {2}'.format(
+    print('Resulted Filter: {0}\nNormalized Filter (0dB): {1}\nSum of normalized coef.: {2}'.format(
         result_filter, normalize(result_filter), sum(normalize(result_filter))))
 
 

@@ -24,6 +24,8 @@ def main():
     result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
     print('Resulted Filter: {0}\nNormalized Filter (0dB): {1}\nSum of normalized coef.: {2}'.format(
         result_filter, normalize(result_filter), sum(normalize(result_filter))))
+    diff_result = make_diff_equat(raw_audio, result_filter)
+    save_audio(np.array(diff_result), 'difference_equation.wav', 'ST6/results')
 
 
 def read_audio(path):
@@ -146,6 +148,31 @@ def join_filters(filter_1, filter_2, band_stop):
     filter_1 = np.array(filter_1)
     filter_2 = np.array(filter_2)
     return (filter_1 + filter_2).tolist() if band_stop else (filter_1 - filter_2).tolist()
+
+
+def make_diff_equat(input_signal, filter):
+    """ # Make Difference Equation multiply
+
+    Args:
+        input_signal (list): signal list
+        filter (list): filter list
+    """
+    aux = []
+    for i in range(0, len(input_signal), len(filter)):
+        piece = input_signal[i:i + len(filter)][::-1]
+        aux[i:i + len(filter)] = np.multiply(filter, piece)
+    return aux
+
+
+def save_audio(file, name, path):
+    """ ## Save Audio
+
+    Args:
+        file (numpy.ndarray): audio array.
+        name (string): file name.
+        path (string): path to save the file.
+    """
+    wv.write('{}/{}'.format(path, name), 44100, (file).astype(np.int16))
 
 
 if __name__ == '__main__':

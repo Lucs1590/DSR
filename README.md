@@ -6,4 +6,5 @@ Here are the algorithms developed by me:
 - [Convolve audio](https://github.com/Lucs1590/DSR/tree/main/ST2)
 - [Low Pass Filter & Inverse Fourier Filter](https://github.com/Lucs1590/DSR/tree/main/ST3)
 - [High Pass Filter & Z-Transform](https://github.com/Lucs1590/DSR/tree/main/ST4)
-
+- [Band Pass & Band Stop Filter](https://github.com/Lucs1590/DSR/tree/main/ST5)
+- [Normalization & Difference Equation](https://github.com/Lucs1590/DSR/tree/main/ST6)

@@ -9,7 +9,7 @@ def main():
     This is a backbone of the project. This Fuction runs all the others.
     """
     audio_a = generate_audio(2)
-    audio_b = generate_audio(time=4, frequence=400)
+    audio_b = generate_audio(time=4, frequency=400)
     audio_y1 = convolve_audio(audio_b, audio_a)
     save_audio(audio_a, 'base_audio_1.wav', 'ST2/audios')
     save_audio(audio_b, 'base_audio_2.wav', 'ST2/audios')
@@ -28,14 +28,14 @@ def main():
     )
 
 
-def generate_audio(time, sample_rate=44100.0, frequence=100):
+def generate_audio(time, sample_rate=44100.0, frequency=100):
     """# Generate Audio
     Function to generate audio based on time.
 
     Args:
         time (int): time of the audio.
         sample_rate (float, optional): sample rate of the audio. Defaults to 44100.0.
-        frequence (int, optional): frequence of the audio. Defaults to 100.
+        frequency (int, optional): frequency of the audio. Defaults to 100.
 
     Returns:
         numpy.ndarray: audio with the samples.
@@ -44,7 +44,7 @@ def generate_audio(time, sample_rate=44100.0, frequence=100):
     num_samples = (time * 1000) * (sample_rate / 1000.0)
     for x in range(int(num_samples)):
         audio.append(np.iinfo(np.int16).max *
-                     math.sin(2 * math.pi * frequence * (x / sample_rate)))
+                     math.sin(2 * math.pi * frequency * (x / sample_rate)))
     return np.array(audio)
 
 

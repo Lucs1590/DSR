@@ -7,18 +7,21 @@ def main():
     This is a backbone of the project. This Fuction runs all the others.
     """
     amplitute_variation = [1.01, 0.99]
-    frequence_variation = [0.06, 0]
+    frequency_variation = [0.06, 0]
     transition_band = [(0.45*math.pi), (0.15*math.pi)]
     (passband, stopband, transition_band_diff) = set_diffs(
-        amplitute_variation, frequence_variation, transition_band)
+        amplitute_variation, frequency_variation, transition_band)
     omega_c = np.mean(transition_band)
     # - dB transform
+    dB = to_dB(stopband)
     # - set min flutuation 1:47:14
     # - choose window type
+    flutuation_type = chose_window_type(dB)
     # - set magnetude
-    # - create filter
     M = get_magnetude(transition_band_diff)
-    print('test')
+    # - create filter
+    result_filter = create_filter()
+    print('h[n] = {0}'.format(result_filter))
 
 
 def set_diffs(amp, freq, trans):
@@ -29,7 +32,19 @@ def set_diffs(amp, freq, trans):
     )
 
 
+def to_dB(frequency):
+    ...
+
+
+def chose_window_type(frequency):
+    ...
+
+
 def get_magnetude(transition_band_diff):
+    ...
+
+
+def create_filter():
     ...
 
 

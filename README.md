@@ -8,3 +8,4 @@ Here are the algorithms developed by me:
 - [High Pass Filter & Z-Transform](https://github.com/Lucs1590/DSR/tree/main/ST4)
 - [Band Pass & Band Stop Filter](https://github.com/Lucs1590/DSR/tree/main/ST5)
 - [Normalization & Difference Equation](https://github.com/Lucs1590/DSR/tree/main/ST6)
+- [Define Signal and Window](https://github.com/Lucs1590/DSR/tree/main/ST7)

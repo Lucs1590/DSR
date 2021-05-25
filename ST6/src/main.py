@@ -24,7 +24,7 @@ def main():
     result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
     print('Resulted Filter: {0}\nNormalized Filter (0dB): {1}\nSum of normalized coef.: {2}'.format(
         result_filter, normalize(result_filter), sum(normalize(result_filter))))
-    diff_result = make_diff_equat(raw_audio, result_filter)
+    diff_result = make_diff_equat(raw_audio, normalize(result_filter))
     save_audio(np.array(diff_result), 'difference_equation.wav', 'ST6/results')
 
 

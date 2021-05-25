@@ -32,8 +32,8 @@ def set_diffs(amp, freq, trans):
     )
 
 
-def to_dB(frequency):
-    ...
+def to_dB(frequency, base=20):
+    return base * math.log10(frequency)
 
 
 def chose_window_type(frequency):

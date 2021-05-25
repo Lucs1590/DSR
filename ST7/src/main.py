@@ -18,7 +18,7 @@ def main():
     # - choose window type
     flutuation_type = choose_window_type(dB)
     # - set magnetude
-    M = get_magnetude(transition_band_diff)
+    M = get_magnetude(transition_band_diff, flutuation_type)
     # - create filter
     result_filter = create_filter()
     print('h[n] = {0}'.format(result_filter))
@@ -51,8 +51,20 @@ def choose_window_type(measure):
     return closet_value[0][0]
 
 
-def get_magnetude(transition_band_diff):
-    ...
+def get_magnetude(trans_diff, _type):
+    reference = {
+        'rectangular': 0.9,
+        'barlett': 3.0,
+        'hanning': 3.1,
+        'hamming': 3.3,
+        'blackman': 5.5
+    }
+    magnetude = reference[_type] / to_frequency_domain(trans_diff)
+    return magnetude
+
+
+def to_frequency_domain(omega):
+    return omega / (2 * math.pi)
 
 
 def create_filter():

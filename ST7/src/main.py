@@ -13,16 +13,12 @@ def main():
     (passband, stopband, transition_band_diff) = set_diffs(
         amplitute_variation, frequency_variation, transition_band)
     omega_c = np.mean(transition_band)
-    # - dB transform
     dB = to_dB(stopband)
-    # - set min flutuation 1:47:14
-    # - choose window type
     flutuation_type = choose_window_type(dB)
-    # - set magnetude
     M = get_magnetude(transition_band_diff, flutuation_type)
-    # - create filter
     result_filter = create_filter(M, omega_c)
-    print('h[n] = {0}'.format(result_filter))
+    print('Filter: {0}\nNormalized_filter: {1}'.format(
+        result_filter, normalize(result_filter)))
 
 
 def set_diffs(amp, freq, trans):

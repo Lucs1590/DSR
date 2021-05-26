@@ -20,7 +20,7 @@ def main():
     # - set magnetude
     M = get_magnetude(transition_band_diff, flutuation_type)
     # - create filter
-    result_filter = create_filter()
+    result_filter = create_filter(M, omega_c)
     print('h[n] = {0}'.format(result_filter))
 
 
@@ -60,15 +60,24 @@ def get_magnetude(trans_diff, _type):
         'blackman': 5.5
     }
     magnetude = reference[_type] / to_frequency_domain(trans_diff)
-    return magnetude
+    return int(magnetude)
 
 
 def to_frequency_domain(omega):
     return omega / (2 * math.pi)
 
 
-def create_filter():
-    ...
+def create_filter(size, cutoff_freq):
+    filter = []
+    for n in range(size+1):
+        try:
+            value = math.sin(cutoff_freq * (n - (size/2))) / \
+                (math.pi * (n - (size/2)))
+            filter.append(value)
+        except:
+            filter.append(cutoff_freq/math.pi)
+
+    return filter
 
 
 if __name__ == '__main__':

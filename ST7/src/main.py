@@ -1,3 +1,4 @@
+from functools import reduce
 import numpy as np
 import math
 
@@ -78,6 +79,20 @@ def create_filter(size, cutoff_freq):
             filter.append(cutoff_freq/math.pi)
 
     return filter
+
+
+def normalize(_list):
+    """ # Normalize list
+
+    Args:
+        signal (list): list of audio or filter.
+
+    Returns:
+        list: list of normalized value
+    """
+    list_sum = reduce((lambda x, y: x + y), _list)
+    normalized_signal = list(map(lambda hi: hi/list_sum, _list))
+    return normalized_signal
 
 
 if __name__ == '__main__':

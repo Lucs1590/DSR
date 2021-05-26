@@ -29,7 +29,7 @@ def main():
 
 
 def read_audio(path):
-    """## Read Audio
+    """ # Read Audio
 
     Args:
         path (string): audio file path.
@@ -41,7 +41,7 @@ def read_audio(path):
 
 
 def audio_to_arr(audio):
-    """ ## Audio to Array
+    """ # Audio to Array
 
     Args:
         audio (tuple): original read audio file.
@@ -114,7 +114,7 @@ def define_cutoff(max_freq, passing_freq, high_pass):
 
 
 def to_high_pass_filter(M, low_pass_filter: list):
-    """# To High Pass
+    """ # To High Pass
 
     Args:
         M (int): the filter magnetude.
@@ -151,11 +151,14 @@ def join_filters(filter_1, filter_2, band_stop):
 
 
 def make_diff_equat(input_signal, filter):
-    """ # Make Difference Equation multiply
+    """ # Make Difference Equation Multiply
 
     Args:
         input_signal (list): signal list
         filter (list): filter list
+
+    Returns:
+        list: list with multiplied results
     """
     aux = []
     for i in range(0, len(input_signal), len(filter)):
@@ -165,7 +168,7 @@ def make_diff_equat(input_signal, filter):
 
 
 def save_audio(file, name, path):
-    """ ## Save Audio
+    """ # Save Audio
 
     Args:
         file (numpy.ndarray): audio array.

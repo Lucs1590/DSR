@@ -14,14 +14,26 @@ def main():
         amplitute_variation, frequency_variation, transition_band)
     omega_c = np.mean(transition_band)
     dB = to_dB(stopband)
-    flutuation_type = choose_window_type(dB)
-    M = get_magnetude(transition_band_diff, flutuation_type)
-    result_filter = create_filter(M, omega_c)
+    windowing_type = choose_window_type(dB)
+    M = get_magnetude(transition_band_diff, windowing_type)
+    result_filter = create_filter(M, omega_c, windowing_type)
     print('Filter: {0}\nNormalized_filter: {1}'.format(
         result_filter, normalize(result_filter)))
+    # - mike difference function
+    # - make readme
 
 
 def set_diffs(amp, freq, trans):
+    """ # Set Difference Values
+
+    Args:
+        amp (list): amplitutes flutuation list.
+        freq (list): frequencies flutuation list.
+        trans (list): transition band variation list.
+
+    Returns:
+        tuple: tuple with difference value for each input params.
+    """
     return (
         np.diff(amp)[0],
         np.diff(freq)[0],
@@ -30,10 +42,27 @@ def set_diffs(amp, freq, trans):
 
 
 def to_dB(frequency, base=20):
+    """ # To dB
+
+    Args:
+        frequency (float): Gain value.
+        base (int, optional): Base of log transform. Defaults to 20.
+
+    Returns:
+        float: value in dB.
+    """
     return base * math.log10(frequency)
 
 
 def choose_window_type(measure):
+    """ # Chose Window Type
+
+    Args:
+        measure (float): dB value.
+
+    Returns:
+        str: name of window type.
+    """
     reference = {
         'rectangular': -21,
         'barlett': -25,
@@ -49,6 +78,15 @@ def choose_window_type(measure):
 
 
 def get_magnetude(trans_diff, _type):
+    """ # Get Magnetude
+
+    Args:
+        trans_diff (float): difference value between transition band.
+        _type (str): window type name.
+
+    Returns:
+        int: the magnetude value.
+    """
     reference = {
         'rectangular': 0.9,
         'barlett': 3.0,
@@ -61,10 +99,28 @@ def get_magnetude(trans_diff, _type):
 
 
 def to_frequency_domain(omega):
+    """ # To Frequency Domain
+
+    Args:
+        omega (float): transition band variation with pi value.
+
+    Returns:
+        float: transition value in frequency domain.
+    """
     return omega / (2 * math.pi)
 
 
-def create_filter(size, cutoff_freq):
+def create_filter(size, cutoff_freq, windowing_type):
+    """ # Create Filter
+
+    Args:
+        size (int): the magnetude value.
+        cutoff_freq (float): cutoff frequency.
+        windowing_type (str): name of window type.
+
+    Returns:
+        list: filter list.
+    """
     filter = []
     for n in range(size+1):
         try:

@@ -122,15 +122,56 @@ def create_filter(size, cutoff_freq, windowing_type):
         list: filter list.
     """
     filter = []
+    equation = choose_windowing_equation(windowing_type, size)
     for n in range(size+1):
         try:
             value = math.sin(cutoff_freq * (n - (size/2))) / \
                 (math.pi * (n - (size/2)))
+            value = value * equation(n)
             filter.append(value)
         except:
+            value = value * equation(n)
             filter.append(cutoff_freq/math.pi)
 
     return filter
+
+
+def choose_windowing_equation(_type, M):
+    """ # Choose windowing Equation
+
+    Args:
+        _type (str): equation name.
+        M (int): magnetude.
+
+    Returns:
+        <function <lambda>>: equation.
+    """
+    reference = {
+        'rectangular': lambda n: 1 if (n >= 0) and (n <= M) else 0,
+        'barlett': lambda n: barlet(M, n),
+        'hanning': lambda n: (1/2) + (1/2) * math.cos(2*math.pi*(n/M)),
+        'hamming': lambda n: 0.54 - 0.46 * math.cos(2*math.pi*(n/M)),
+        'blackman': lambda n: 0.42 - 0.5 * math.cos(2*math.pi*(n/M)) + 0.08 * math.cos(4*math.pi*(n/M))
+    }
+    return reference[_type]
+
+
+def barlet(M, n):
+    """ # Barlet Equation
+
+    Args:
+        M (int): magnetude.
+        n (float): index number.
+
+    Returns:
+        float: equation result.
+    """
+    if (n >= 0) and (n <= (M/2)):
+        return (2*n)/M
+    elif (n >= ((M/2)+1)) and (n <= (M/2)):
+        return 2 - ((2*n)/M)
+    else:
+        return 0
 
 
 def normalize(_list):

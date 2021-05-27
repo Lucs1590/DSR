@@ -19,8 +19,6 @@ def main():
     result_filter = create_filter(M, omega_c, windowing_type)
     print('Filter: {0}\nNormalized_filter: {1}'.format(
         result_filter, normalize(result_filter)))
-    # - mike difference function
-    # - make readme
 
 
 def set_diffs(amp, freq, trans):

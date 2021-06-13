@@ -12,8 +12,26 @@ def main():
     samples_second = 8_000
     ms = 0.25
 
+    audio = apply_mean_removal(raw_audio)
     delay_spaces = define_delay(samples_second, ms)
-    (energy, zcr) = audio_slip(raw_audio, delay_spaces)
+    (energy, zcr) = audio_slip(audio, delay_spaces)
+
+    print(
+        'The len of pairs is: {0};\nTotal Raw Energy: {1};\nTotal Energy: {2};\n\
+Total ZCR: {3};\nEnergy List: {4};\nZCR List: {5}.'.format(
+            len(energy),
+            calc_energy(raw_audio),
+            calc_energy(audio),
+            calc_zcr(audio),
+            energy,
+            zcr
+        )
+    )
+
+
+def apply_mean_removal(sample):
+    avg = sum(sample) / len(sample)
+    return np.array(sample) - avg
 
 
 def define_delay(ss, ms):
@@ -28,9 +46,11 @@ def audio_slip(signal, delay, overlap=0.5):
 
     while i < len(signal):
         values = signal[i:i + delay]
+        if len(values) < delay:
+            break
         energy_list.append(calc_energy(values))
         zcr_list.append(calc_zcr(values))
-        i += int(i / overlap)
+        i += int(len(values)*(1-overlap))
 
     return (energy_list, zcr_list)
 
@@ -40,10 +60,10 @@ def calc_energy(frame):
 
 
 def calc_zcr(frame):
-    i = 0
+    i = 1
     aux = 0
     while i < len(frame):
-        aux += 1 if (frame[i] * frame[i+1]) < 0 else 0
+        aux += 1 if (frame[i-1] * frame[i]) < 0 else 0
         i += 1
     return aux
 

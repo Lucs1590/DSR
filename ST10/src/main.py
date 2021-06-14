@@ -30,15 +30,42 @@ Total ZCR: {3};\nEnergy List: {4};\nZCR List: {5}.'.format(
 
 
 def apply_mean_removal(sample):
+    """ # Apply Mean Removal
+
+    Args:
+        sample (list): list of samples.
+
+    Returns:
+        numpy.ndarray: list with values minus the mean.
+    """
     avg = sum(sample) / len(sample)
     return np.array(sample) - avg
 
 
 def define_delay(ss, ms):
+    """ # Define Delay Size
+
+    Args:
+        ss (int): samples per second.
+        ms ([type]): time in miliseconds.
+
+    Returns:
+        int: value of delay size.
+    """
     return int((ss * ms)/1000)
 
 
 def audio_slip(signal, delay, overlap=0.5):
+    """ # Audio Slip
+
+    Args:
+        signal (numpy.ndarray): audio signal.
+        delay (int): value of delay size.
+        overlap (float, optional): overlap rate. Defaults to 0.5.
+
+    Returns:
+        tuple: list of energy and list of zero crossing rate list.
+    """
     signal = np.array(signal)
     energy_list = []
     zcr_list = []
@@ -56,10 +83,26 @@ def audio_slip(signal, delay, overlap=0.5):
 
 
 def calc_energy(frame):
+    """ # Calculate Energy
+
+    Args:
+        frame (numpy.ndarray): piece of audio list.
+
+    Returns:
+        numpy.ndarray: energy of the frame.
+    """
     return np.sum(np.power(frame, 2))
 
 
 def calc_zcr(frame):
+    """ # Calculate Zero Crossing Rate
+
+    Args:
+        frame (numpy.ndarray): piece of audio list.
+
+    Returns:
+        int: number of zero crossing rate
+    """
     i = 1
     aux = 0
     while i < len(frame):

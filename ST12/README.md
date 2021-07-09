@@ -1,7 +1,7 @@
-# - 
+# Linear Predictive Coding (LPC)
 
 # How it works?
-- 
+LPC is used as a technique that enables the enveloping of a given signal, as well as the prediction of some factors, since it is possible to determine some coefficients from a y[n] signal.
 
 # How to run?
 

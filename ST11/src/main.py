@@ -1,4 +1,4 @@
-import numpy as np
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -10,6 +10,19 @@ def main():
     reverse_signal = reverse(signal)
     result_signal = apply_AMDF(reverse_signal, signal)
     print(result_signal)
+    plot_graph(result_signal)
+
+
+def reverse(audio_arr):
+    """ ## Reverse
+
+    Args:
+        audio_arr (numpy.ndarray): audio data in numpy array type.
+
+    Returns:
+        numpy.ndarray: reversed array.
+    """
+    return audio_arr[::-1]
 
 
 def apply_AMDF(signal_1, signal_2):
@@ -36,16 +49,9 @@ def complete_with_zeros(signal, final_size, idx):
     return signal
 
 
-def reverse(audio_arr):
-    """ ## Reverse
-
-    Args:
-        audio_arr (numpy.ndarray): audio data in numpy array type.
-
-    Returns:
-        numpy.ndarray: reversed array.
-    """
-    return audio_arr[::-1]
+def plot_graph(samples):
+    plt.plot(samples)
+    plt.show()
 
 
 if __name__ == '__main__':

@@ -11,4 +11,7 @@ Here are the algorithms developed by me:
 - [Define Signal and Window](https://github.com/Lucs1590/DSR/tree/main/ST7);
 - [Zeros and Poles](https://github.com/Lucs1590/DSR/blob/main/ST8.pdf);
 - [Type of Transfer Function](https://github.com/Lucs1590/DSR/blob/main/ST9.pdf);
-- [Pre-processing and Windowing](https://github.com/Lucs1590/DSR/tree/main/ST10).
+- [Pre-processing and Windowing](https://github.com/Lucs1590/DSR/tree/main/ST10);
+- [Correlation and AMDF](https://github.com/Lucs1590/DSR/tree/main/ST11);
+- [](https://github.com/Lucs1590/DSR/tree/main/ST12);
+- [](https://github.com/Lucs1590/DSR/tree/main/ST13).

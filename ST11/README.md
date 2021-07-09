@@ -1,7 +1,7 @@
 # Correlation and AMDF
 
 # How it works?
-This project has a script that make a correlation using auto AMDF and show F0. To do it, we apply a correlation to find the min value of the signal and after we try to set the interval betwen the waves.
+This project has a script that does a correlation using AMDF auto and shows F0. For this, we apply a correlation to find the minimum value of the signal and then try to define the interval between waves, as well as a determination of F0 through these intervals and the value of samples per second.
 
 # How to run?
 

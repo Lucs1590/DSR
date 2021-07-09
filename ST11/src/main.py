@@ -9,15 +9,7 @@ def main():
 
     reverse_signal = reverse(signal)
     result_signal = apply_AMDF(reverse_signal, signal)
-    plot_graph(result_signal)
-    print("AMDF: {0}\nF1: {1} at position {2}.".format(
-        result_signal,
-        None if (len(result_signal) %
-                 2) == 0 else result_signal[int(len(result_signal)/2)],
-        None if (len(result_signal) % 2) == 0 else int(
-            len(result_signal)/2) + 1,
-    )
-    )
+    show_results(result_signal)
 
 
 def reverse(audio_arr):
@@ -56,7 +48,16 @@ def complete_with_zeros(signal, final_size, idx):
     return signal
 
 
-def plot_graph(samples):
+def show_results(samples):
+    print("AMDF: {0}\nF1: {1} at position {2}.".
+          format(
+              samples,
+              None if (len(samples) %
+                       2) == 0 else samples[int(len(samples)/2)],
+              None if (len(samples) % 2) == 0 else int(
+                  len(samples)/2) + 1,
+          ))
+
     plt.plot(samples)
     plt.show()
 

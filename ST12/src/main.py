@@ -8,11 +8,11 @@ def main():
     """
     order = 3
     signal = [2, 3, 5, 8, 8, 10, 6]
-    signal = complete_with_zero(signal, order)
+    signal = complete_with_zeros(signal, order)
     (matrix_A, matrix_B) = define_matrix_A_B(signal)
 
 
-def complete_with_zero(signal, order):
+def complete_with_zeros(signal, order):
     for i in range(order):
         signal.append(0)
         signal.insert(0, 0)

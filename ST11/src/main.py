@@ -9,8 +9,15 @@ def main():
 
     reverse_signal = reverse(signal)
     result_signal = apply_AMDF(reverse_signal, signal)
-    print(result_signal)
     plot_graph(result_signal)
+    print("AMDF: {0}\nF1: {1} at position {2}.".format(
+        result_signal,
+        None if (len(result_signal) %
+                 2) == 0 else result_signal[int(len(result_signal)/2)],
+        None if (len(result_signal) % 2) == 0 else int(
+            len(result_signal)/2) + 1,
+    )
+    )
 
 
 def reverse(audio_arr):

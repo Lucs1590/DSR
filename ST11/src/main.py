@@ -26,6 +26,15 @@ def reverse(audio_arr):
 
 
 def apply_AMDF(signal_1, signal_2):
+    """ #Apply AMDF
+
+    Args:
+        signal_1 (list): list with samples
+        signal_2 (list): list with samples
+
+    Returns:
+        list: list of AMDF
+    """
     results = []
     final_size = (len(signal_1) + len(signal_2)) - 1
 
@@ -40,6 +49,16 @@ def apply_AMDF(signal_1, signal_2):
 
 
 def complete_with_zeros(signal, final_size, idx):
+    """ # Complete with zeros
+
+    Args:
+        signal (list): signal list
+        final_size (int): size of list
+        idx (int): interaction number
+
+    Returns:
+        list: list with the final_size and with zeros
+    """
     for i in range(idx):
         signal.append(0)
 
@@ -50,25 +69,40 @@ def complete_with_zeros(signal, final_size, idx):
 
 
 def find_period(samples_second):
+    """ # Find Period
+
+    Args:
+        samples_second (int): number of samples per second
+
+    Returns:
+        float: samples per period divided by samples per second
+    """
     samples_period = 4
     return samples_period / samples_second
 
 
 def show_results(samples, samples_second):
+    """ # Show Results
+
+    Args:
+        samples (list): list of AMDF
+        samples_second (int): number of samples per second
+    """
     print("\
     Samples per Second: {4}\n\
     T: {5}\n\
     AMDF: {0}\n\
     F0: {3}\n\
     Min Value: {1} at position {2} (center)".
-        format(
-            samples,
-            None if (len(samples) %2) == 0 else samples[int(len(samples)/2)],
-            None if (len(samples) % 2) == 0 else int(len(samples)/2) + 1,
-            1 / find_period(samples_second),
-            samples_second,
-            find_period(samples_second)
-        ))
+          format(
+              samples,
+              None if (len(samples) %
+                       2) == 0 else samples[int(len(samples)/2)],
+              None if (len(samples) % 2) == 0 else int(len(samples)/2) + 1,
+              1 / find_period(samples_second),
+              samples_second,
+              find_period(samples_second)
+          ))
 
     plt.plot(samples)
     plt.show()

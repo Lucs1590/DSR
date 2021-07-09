@@ -6,10 +6,11 @@ def main():
     This is a backbone of the project. This Fuction runs all the others.
     """
     signal = [0, 1, 3, 0, 1, 3, 0, 1, 3, 0]
+    samples_second = 8_000
 
     reverse_signal = reverse(signal)
     result_signal = apply_AMDF(reverse_signal, signal)
-    show_results(result_signal)
+    show_results(result_signal, samples_second)
 
 
 def reverse(audio_arr):
@@ -48,15 +49,26 @@ def complete_with_zeros(signal, final_size, idx):
     return signal
 
 
-def show_results(samples):
-    print("AMDF: {0}\nF1: {1} at position {2}.".
-          format(
-              samples,
-              None if (len(samples) %
-                       2) == 0 else samples[int(len(samples)/2)],
-              None if (len(samples) % 2) == 0 else int(
-                  len(samples)/2) + 1,
-          ))
+def find_period(samples_second):
+    samples_period = 4
+    return samples_period / samples_second
+
+
+def show_results(samples, samples_second):
+    print("\
+    Samples per Second: {4}\n\
+    T: {5}\n\
+    AMDF: {0}\n\
+    F0: {3}\n\
+    Min Value: {1} at position {2} (center)".
+        format(
+            samples,
+            None if (len(samples) %2) == 0 else samples[int(len(samples)/2)],
+            None if (len(samples) % 2) == 0 else int(len(samples)/2) + 1,
+            1 / find_period(samples_second),
+            samples_second,
+            find_period(samples_second)
+        ))
 
     plt.plot(samples)
     plt.show()

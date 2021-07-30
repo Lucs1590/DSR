@@ -5,8 +5,8 @@ def main():
     """ # Main
     This is a backbone of the project. This Fuction runs all the others.
     """
-    order = 3
-    signal = [2, 3, 5, 8, 8, 10, 6]
+    order = 4
+    signal = [2, 5, 2, 3, 5, 8, 4, 8, 10, 6]
     signal = complete_with_zeros(signal, order)
     (matrix_A, matrix_B) = define_matrix_A_B(signal, order)
     mAtA, mAtB = make_operations(matrix_A, matrix_B)

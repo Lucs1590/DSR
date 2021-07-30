@@ -17,15 +17,15 @@ pip install -r  requirements.txt --user
 As mentioned, we only have short tests 1, 2, 5, 7 ... that can be run via Python.
 So, after installing the prerequisites, execute the following commands in the terminal, having the Final Exam root folder.
 ```bash
-python src/ex_1.py
+python ex_1/ex_1.py
 ```
 ```bash
-python src/ex_2/ex_2.py
+python ex_2/ex_2.py
 ```
 ```bash
-python src/ex_5.py
+python ex_5/ex_5.py
 ```
 ```bash
-python src/ex_7.py
+python ex_7/ex_7.py
 ```
 

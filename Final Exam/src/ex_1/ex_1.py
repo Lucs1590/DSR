@@ -1,4 +1,3 @@
-from scipy.io import wavfile as wv
 from functools import reduce
 import numpy as np
 import math
@@ -8,11 +7,10 @@ def main():
     """ # Main
     This is a backbone of the project. This Fuction runs all the others.
     """
-    M = 4
-    cutoff_frequencies = [2_500, 3_500]
-    samples_p_second = 10_000
+    M = 8
+    cutoff_frequencies = [2_000, 4_000]
+    samples_p_second = 22_050
     band_stop = True
-    raw_audio = audio_to_arr(read_audio("ST6/audios/soneto.wav"))
 
     low_pass_filter = normalize(create_filter(
         M, cutoff_frequencies[0], samples_p_second, False))
@@ -24,20 +22,6 @@ def main():
     result_filter = join_filters(low_pass_filter, high_pass_filter, band_stop)
     print('Resulted Filter: {0}\nNormalized Filter (0dB): {1}\nSum of normalized coef.: {2}'.format(
         result_filter, normalize(result_filter), sum(normalize(result_filter))))
-    diff_result = make_diff_equat(raw_audio, normalize(result_filter))
-    save_audio(np.array(diff_result), 'difference_equation.wav', 'ST6/results')
-
-
-def read_audio(path):
-    """ # Read Audio
-
-    Args:
-        path (string): audio file path.
-
-    Returns:
-        tuple: the read file.
-    """
-    return wv.read(path)
 
 
 def audio_to_arr(audio):
@@ -148,34 +132,6 @@ def join_filters(filter_1, filter_2, band_stop):
     filter_1 = np.array(filter_1)
     filter_2 = np.array(filter_2)
     return (filter_1 + filter_2).tolist() if band_stop else (filter_1 - filter_2).tolist()
-
-
-def make_diff_equat(input_signal, filter):
-    """ # Make Difference Equation Multiply
-
-    Args:
-        input_signal (list): signal list
-        filter (list): filter list
-
-    Returns:
-        list: list with multiplied results
-    """
-    aux = []
-    for i in range(0, len(input_signal), len(filter)):
-        piece = input_signal[i:i + len(filter)][::-1]
-        aux[i:i + len(filter)] = np.multiply(filter, piece)
-    return aux
-
-
-def save_audio(file, name, path):
-    """ # Save Audio
-
-    Args:
-        file (numpy.ndarray): audio array.
-        name (string): file name.
-        path (string): path to save the file.
-    """
-    wv.write('{}/{}'.format(path, name), 44100, (file).astype(np.int16))
 
 
 if __name__ == '__main__':

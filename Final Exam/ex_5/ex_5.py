@@ -1,16 +1,15 @@
-from scipy.io import wavfile as wv
-from functools import reduce
+from math import log, log10
 import numpy as np
-import math
 
 
 def main():
     """ # Main
     This is a backbone of the project. This Fuction runs all the others.
     """
-    raw_audio = [1, 2, -3, 3, -2, 1, -1, -1, 4, 5, -5, 4]
-    samples_second = 8_000
-    ms = 0.25
+    raw_audio = [-1, 2, -3, 3, 2, 1, -1, -1, -4, 5, 5, 4]
+    samples_second = 16_000
+    ms = 0.125
+    base = 10
 
     audio = apply_mean_removal(raw_audio)
     delay_spaces = define_delay(samples_second, ms)
@@ -18,13 +17,14 @@ def main():
 
     print(
         'The len of pairs is: {0};\nTotal Raw Energy: {1};\nTotal Energy: {2};\n\
-Total ZCR: {3};\nEnergy List: {4};\nZCR List: {5}.'.format(
+Signal Entropy: {6};\nTotal ZCR: {3};\nEnergy List: {4};\nZCR List: {5}.'.format(
             len(energy),
             calc_energy(raw_audio),
             calc_energy(audio),
             calc_zcr(audio),
             energy,
-            zcr
+            zcr,
+            calculate_entropy(audio, base)
         )
     )
 
@@ -40,6 +40,34 @@ def apply_mean_removal(sample):
     """
     avg = sum(sample) / len(sample)
     return np.array(sample) - avg
+
+
+def calculate_entropy(signal, base=10):
+    """ # Calculate Entropy
+
+    Args:
+        signal (np.ndarray): list with samples
+        base (int, optional): base of log. Defaults to 10.
+
+    Raises:
+        ValueError: If the base isn't 2 or 10.
+
+    Returns:
+        float: entropy value.
+    """
+    total_len = len(signal)
+    values, counts = np.unique(signal, return_counts=True)
+    probability = list(map(lambda x: x/total_len, counts))
+
+    if(base == 2):
+        entropy = np.array(
+            list(map(lambda value: value * log(value), probability)))
+    elif (base == 10):
+        entropy = np.array(
+            list(map(lambda value: -1 * (value * log10(value)), probability)))
+    else:
+        raise ValueError('''You can't use this number like a base.''')
+    return np.sum(entropy)
 
 
 def define_delay(ss, ms):

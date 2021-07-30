@@ -20,7 +20,7 @@ So, after installing the prerequisites, execute the following commands in the te
 python src/ex_1.py
 ```
 ```bash
-python src/ex_2.py
+python src/ex_2/ex_2.py
 ```
 ```bash
 python src/ex_5.py

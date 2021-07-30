@@ -7,9 +7,9 @@ def main():
     """ # Main
     This is a backbone of the project. This Fuction runs all the others.
     """
-    amplitute_variation = [0.99, 1.01]
+    amplitute_variation = [0.98, 1.02]
     frequency_variation = [0, 0.06]
-    transition_band = [(0.15*math.pi), (0.45*math.pi)]
+    transition_band = [(0.1*math.pi), (0.4*math.pi)]
     (passband, stopband, transition_band_diff) = set_diffs(
         amplitute_variation, frequency_variation, transition_band)
     omega_c = np.mean(transition_band)

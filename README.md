@@ -14,3 +14,6 @@ Here are the algorithms developed by me:
 - [Pre-processing and Windowing](https://github.com/Lucs1590/DSR/tree/main/ST10);
 - [Correlation and AMDF](https://github.com/Lucs1590/DSR/tree/main/ST11);
 - [Linear Predictive Coding (LPC)](https://github.com/Lucs1590/DSR/tree/main/ST12).
+
+
+NOTE: This repository is archived, so it will only be used for consultations.

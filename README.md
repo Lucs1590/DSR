@@ -13,4 +13,4 @@ Here are the algorithms developed by me:
 - [Type of Transfer Function](https://github.com/Lucs1590/DSR/blob/main/ST9.pdf);
 - [Pre-processing and Windowing](https://github.com/Lucs1590/DSR/tree/main/ST10);
 - [Correlation and AMDF](https://github.com/Lucs1590/DSR/tree/main/ST11);
-- [Linear Predictive Coding (LPC)](https://github.com/Lucs1590/DSR/tree/main/ST12);
+- [Linear Predictive Coding (LPC)](https://github.com/Lucs1590/DSR/tree/main/ST12).

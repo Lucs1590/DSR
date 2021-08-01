@@ -26,6 +26,15 @@ The class closest to the template is the class: {1}.'.format(
 
 
 def calculate_euclidian_distance(_template, _class):
+    """# Calculate Euclidian Distance
+
+    Args:
+        _template (list): list with the template samples.
+        _class (list): list to compare with template.
+
+    Returns:
+        float: distance between template and class.
+    """
     return math.sqrt(sum((np.array(_template) - np.array(_class))**2))
 
 
